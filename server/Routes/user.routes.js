@@ -5,15 +5,10 @@ const validationRule = require("../config/validationRules");
 const router = express.Router();
 const controller = require("../Controllers/user.controller");
 const Authorization = require("../Middleware/Authorization");
-<<<<<<< HEAD
 const { uploadimage } = require("../helper/imagehelper");
 const { uploadpdf } = require("../helper/pdfhelper");
 
 //admin authentication api
-=======
-const { upload } = require("../helper/imagehelper");
-
->>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
 router.post("/auth", requireAuth, (req, res) => {
   res.send({
     message: "You are Authorisexd user",
@@ -74,21 +69,15 @@ router.post("/blUser",requireAuth,controller.block_Unblock_User);
 
 router.post("/allenquiry", requireAuth, controller.allenquiry)
 
-<<<<<<< HEAD
 router.post("/checkimage",uploadimage.single('file'),controller.checkimage); 
 
 
 //mobile app
-=======
-router.post("/checkimage",upload.single('file'),controller.checkimage); 
-
->>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
 router.post("/posthighlights",controller.posthighlights)
 router.post("/gethighlights",Authorization,requireAuth,controller.gethighlights);
 router.delete("/deletehighlight",controller.deletehighlight);
 
 router.post("/postnote",controller.postnote)
-<<<<<<< HEAD
 router.post("/getnotes",controller.getnotes);
 router.delete("/deletenote",controller.deletenote);
 
@@ -102,9 +91,4 @@ router.post("/chapterdata",uploadpdf.single("file"),controller.chapterData);
 router.post("/getchapter",controller.getchapterdata)
 
 
-=======
-router.post("/getnote",controller.getnote);
-router.delete("/deletenote",controller.deletenote);
-
->>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
 module.exports = router;
