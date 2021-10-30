@@ -6,7 +6,10 @@ const nodemailer = require("nodemailer");
 const dotenev = require("dotenv");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+<<<<<<< HEAD
 const domain="http://lawcodes.sourcesoftsolutions.com/lawcodeassets/"
+=======
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
 
 const User = require("../Models/UserSchema");
 const Enquiry = require("../Models/enquirySchema");
@@ -15,8 +18,11 @@ const Divisons = require("../Models/Division");
 const Chapters = require("../Models/Chapters");
 const Highlights = require("../Models/Highlights");
 const Notes = require("../Models/Notes");
+<<<<<<< HEAD
 const Bookmarks = require("../Models/Bookmarks");
 const ChapterData = require("../Models/ChapterData");
+=======
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
 
 dotenev.config();
 
@@ -769,7 +775,11 @@ const logout=async(req,res)=>{
     await req.user.save();
     res.send({
       message: "you have been logged out",
+<<<<<<< HEAD
       status: "true",
+=======
+      status: "false",
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
       sessionExist: "0",
       response: {
         data: {
@@ -878,7 +888,11 @@ const categoryshow = async (req, res) => {
         res.send({
           message: "Categories",
           status: "true",
+<<<<<<< HEAD
           sessionExist: "1",
+=======
+          sessionExist: "0",
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
           response: {
             data: category
           },
@@ -891,11 +905,22 @@ const categoryshow = async (req, res) => {
         status: "false",
         sessionExist: "0",
         response: {
+<<<<<<< HEAD
           data: null
+=======
+          data: {
+            id: null,
+            full_name: null,
+            email: null,
+            mobile: null,
+            token: null,
+          },
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
         },
       });
     }
   } catch (err) {
+<<<<<<< HEAD
     res.send({
       message: `Category get api fail because ${err.message} `,
       status: "false",
@@ -904,6 +929,10 @@ const categoryshow = async (req, res) => {
         data: null
       },
     });
+=======
+    console.log("error", err);
+    res.send("category get api fail")
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
   }
 }
 
@@ -942,7 +971,11 @@ const divisionshow = async (req, res) => {
       res.send({
         message: "Divisions",
         status: "true",
+<<<<<<< HEAD
         sessionExist: "1",
+=======
+        sessionExist: "0",
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
         response: {
           data: divs
         },
@@ -952,7 +985,11 @@ const divisionshow = async (req, res) => {
   } catch (err) {
     console.log("error", err);
     res.send({
+<<<<<<< HEAD
       message: `Divisions show api fail because ${err.message} `,
+=======
+      message: "Divisions show api fail",
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
       status: "false",
       sessionExist: "0",
       response: {
@@ -994,6 +1031,7 @@ const chaptershow = async (req, res) => {
     Chapters.find({}, (err, data) => {
       if (err) throw err;
       const chapters = data.filter(e => e.DivisionId == divisionid);
+<<<<<<< HEAD
       res.send({
         message: "All chapters",
         status: "true",
@@ -1012,6 +1050,14 @@ const chaptershow = async (req, res) => {
         data: null
       },
     });
+=======
+      console.log(chapters);
+      res.send(chapters);
+    })
+  } catch (err) {
+    console.log("error", err);
+    res.send("chapter get api fail")
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
   }
 }
 
@@ -1020,8 +1066,12 @@ const checkimage=async(req,res)=>{
  
   try{
    console.log("image file",req.file)
+<<<<<<< HEAD
    const imagegurl=domain+(req.file.path)
    res.send(imagegurl);
+=======
+   res.send(`http://localhost:4000/${req.file.path}`)
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
   //  res.send(`http://lawcode.sourcesoftsolutions.com/${req.file.path}`)
   
   }
@@ -1045,6 +1095,7 @@ const posthighlights=async(req,res)=>{
 
    })
    await hightlight.save();
+<<<<<<< HEAD
    res.send({
     message: "Text Highlghted",
     status: "true",
@@ -1064,6 +1115,13 @@ const posthighlights=async(req,res)=>{
         data: null
       },
     });
+=======
+   res.send("data has been highlighted")
+
+  }
+  catch(err){
+    res.send("highlight api fail");
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
   }
 }
  const gethighlights=async(req,res)=>{
@@ -1071,6 +1129,7 @@ const posthighlights=async(req,res)=>{
      Highlights.find({},(err,data)=>{
        if(err) res.send("get highlight api fail")
        else{
+<<<<<<< HEAD
         res.send({
           message: "Highlghtes",
           status: "true",
@@ -1079,10 +1138,14 @@ const posthighlights=async(req,res)=>{
             data: data
           },
         });
+=======
+         res.send(data);
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
        }
      })
    }
    catch(err){
+<<<<<<< HEAD
     res.send({
       message: `Get highlights api fail ${err.message}`,
       status: "false",
@@ -1091,12 +1154,16 @@ const posthighlights=async(req,res)=>{
         data: null
       },
     });
+=======
+     res.send("get highlight api fail")
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
    }
  }
  const deletehighlight=async(req,res)=>{
    const {highlight_id}=req.body;
    try{
    await Highlights.deleteOne({_id:highlight_id});
+<<<<<<< HEAD
    res.send({
     message: "Highlghte deleted",
     status: "true",
@@ -1115,6 +1182,12 @@ const posthighlights=async(req,res)=>{
         data: null
       },
     });
+=======
+    res.send("highlight deleted")
+   }
+   catch(err){
+     res.send("failed to delete highlight")
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
    }
  }
 
@@ -1123,7 +1196,11 @@ const posthighlights=async(req,res)=>{
   try{
   const chapterdata=await Chapters.findOne({_id:chapter_id})
   const chaptername=chapterdata.ChapterName
+<<<<<<< HEAD
 //  console.log(chapterdata.ChapterName);
+=======
+ console.log(chapterdata.ChapterName);
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
  const date=new Date();
  const currentDate=date.toLocaleDateString("en-Zn");
   const note=new Notes({
@@ -1133,6 +1210,7 @@ const posthighlights=async(req,res)=>{
 
    })
    await note.save();
+<<<<<<< HEAD
    res.send({
     message: "Note added",
     status: "true",
@@ -1155,10 +1233,21 @@ const posthighlights=async(req,res)=>{
   }
 }
  const getnotes=async(req,res)=>{
+=======
+   res.send("data has been noted")
+
+  }
+  catch(err){
+    res.send("note api fail");
+  }
+}
+ const getnote=async(req,res)=>{
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
    try{
      Notes.find({},(err,data)=>{
        if(err) res.send("get note api fail")
        else{
+<<<<<<< HEAD
         res.send({
           message: "Notes ", 
           status: "true",
@@ -1167,10 +1256,14 @@ const posthighlights=async(req,res)=>{
             data:data
           },
         });
+=======
+         res.send(data);
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
        }
      })
    }
    catch(err){
+<<<<<<< HEAD
     res.send({
       message: `get note api fail ${err.message}`,
       status: "false",
@@ -1289,10 +1382,24 @@ const posthighlights=async(req,res)=>{
         data: null
       },
     });
+=======
+     res.send("get highlight api fail")
+   }
+ }
+ const deletenote=async(req,res)=>{
+   const {highlight_id}=req.body;
+   try{
+   await Notes.deleteOne({_id:highlight_id});
+    res.send("highlight deleted")
+   }
+   catch(err){
+     res.send("failed to delete highlight")
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
    }
  }
 
 
+<<<<<<< HEAD
 const chapterData=async(req,res)=>{
  const {text,chapter_id}=req.body;
    try{
@@ -1355,6 +1462,10 @@ const getchapterdata=async(req,res)=>{
     });
   }
 }
+=======
+
+
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
 module.exports = {
   userRegister,
   userLogin,
@@ -1381,6 +1492,7 @@ module.exports = {
   gethighlights,
   deletehighlight,
   postnote,
+<<<<<<< HEAD
   getnotes,
   deletenote,
   postbookmark,
@@ -1389,4 +1501,8 @@ module.exports = {
   // chapterDataText,
   chapterData,
   getchapterdata
+=======
+  getnote,
+  deletenote
+>>>>>>> 3865db031ab8fb468ad8a62e1ab300e3f93ca637
 };
