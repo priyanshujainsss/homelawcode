@@ -7,7 +7,19 @@ const categorySchema = new mongoose.Schema({
   },
   State:{
     type:String
-  }
+  },
+  Latitude:{
+    type:Number
+  },
+  Longitude:{
+    type:Number
+  },
+  Image:{
+    type:String
+  },
+  Color:{
+    type:String
+  }  
 });
 const Categorys = mongoose.model("categories", categorySchema);
 module.exports =  Categorys 

@@ -7,6 +7,9 @@ const divisonSchema = new mongoose.Schema({
   },
   CategoryId:{
       type:String
+  },
+  Color:{
+    type:String
   }
 });
 const Divisons = mongoose.model("divisions", divisonSchema);

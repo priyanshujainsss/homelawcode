@@ -845,18 +845,23 @@ const block_Unblock_User = async (req, res) => {
 };
 
 const categorypost = async (req, res) => {
-  console.log(category_image)
   const {
     CategoryName,
-    State
+    Latitude,
+    Longitude,
+    Color
   } = req.body;
   try {
     if (CategoryName) {
       const category = new Categorys({
         CategoryName,
-        State
+        Longitude,
+        Latitude,
+        Color,
+        Image:domain+(req.file.filename)
       })
       await category.save();
+        console.log(req.file)
       res.send("category add");
     } else {
       res.send("please enter category name")
@@ -868,13 +873,13 @@ const categorypost = async (req, res) => {
 }
 
 const categoryshow = async (req, res) => {
-  const {state}=req.body;
+  const {Latitude,Longitude}=req.body;
   try {
-    if(state){
+    if(Latitude && Longitude){
       Categorys.find({}, (err, data) => {
         if (err) throw err;
         console.log(data);
-        const category=data.filter(e=>e.State==state);
+        const category=data.filter(e=>e.Latitude==Latitude && e.Longitude == Longitude);
         res.send({
           message: "Categories",
           status: "true",
@@ -887,7 +892,7 @@ const categoryshow = async (req, res) => {
     }
     else{
       res.send({
-        message: "Please Select state",
+        message: "Please Give latlong",
         status: "false",
         sessionExist: "0",
         response: {
@@ -914,9 +919,13 @@ const divisonpost = async (req, res) => {
   } = req.body;
   try {
     if (DivisionName && CategoryId) {
+      const categorycolor=await Categorys.findById(CategoryId);
+      console.log(categorycolor.Color)
+
       const divison = new Divisons({
         DivisionName,
-        CategoryId
+        CategoryId,
+        Color:categorycolor.Color
       })
       await divison.save();
       res.send("divison added");
@@ -970,9 +979,12 @@ const chapterpost = async (req, res) => {
   } = req.body;
   try {
     if (ChapterName && DivisionId) {
+      const divisioncolor=await Divisons.findById(DivisionId);
+ 
       const chapter = new Chapters({
         ChapterName,
-        DivisionId
+        DivisionId,
+        Color:divisioncolor.Color
       })
       await chapter.save();
       res.send("chapter added");
@@ -987,13 +999,13 @@ const chapterpost = async (req, res) => {
 
 const chaptershow = async (req, res) => {
   const {
-    divisionid
+    DivisionId
   } = req.body;
-  console.log(divisionid)
+  console.log(DivisionId)
   try {
     Chapters.find({}, (err, data) => {
       if (err) throw err;
-      const chapters = data.filter(e => e.DivisionId == divisionid);
+      const chapters = data.filter(e => e.DivisionId == DivisionId);
       res.send({
         message: "All chapters",
         status: "true",
@@ -1019,8 +1031,8 @@ const chaptershow = async (req, res) => {
 const checkimage=async(req,res)=>{
  
   try{
-   console.log("image file",req.file)
-   const imagegurl=domain+(req.file.path)
+   console.log("image file",req.file, req.body.Name)
+   const imagegurl=domain+(req.file.filename)
    res.send(imagegurl);
   //  res.send(`http://lawcode.sourcesoftsolutions.com/${req.file.path}`)
   

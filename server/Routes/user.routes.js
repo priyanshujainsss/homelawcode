@@ -49,16 +49,16 @@ router.get("/aboutus",controller.aboutus)
 router.post("/logout",Authorization,requireAuth,controller.logout)
 
 //catgories
-router.post("/categorypost",controller.categorypost);
-router.post("/categoryshow",Authorization,requireAuth,controller.categoryshow);
+router.post("/categorypost",uploadimage.single('file'),controller.categorypost);
+router.post("/categoryshow",controller.categoryshow);
 
 //divisons
 router.post("/divisionpost",controller.divisonpost);
-router.post("/divisionshow",Authorization,controller.divisionshow);
+router.post("/divisionshow",controller.divisionshow);
 
 //chapters
 router.post("/chapterpost",controller.chapterpost);
-router.post("/chaptershow",Authorization,controller.chaptershow);
+router.post("/chaptershow",controller.chaptershow);
 
 
 

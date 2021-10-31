@@ -7,6 +7,9 @@ const chapterSchema = new mongoose.Schema({
   },
   DivisionId:{
       type:String
+  },
+  Color:{
+    type:String
   }
 });
 const Chapters = mongoose.model("chapters", chapterSchema);
